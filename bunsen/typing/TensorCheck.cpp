@@ -52,10 +52,12 @@ CheckStatus TensorCheck::Check(const at::Tensor &tensor, BoundData *data) const 
         checkSize = tensor.size(dim);
       }
 
-      dimMatchMask |= (1 << dim) * int(tensor.size(dim) == checkSize) * int(!this->m_IsBlacklist);
+      if ((tensor.size(dim) == checkSize) == this->m_IsBlacklist) {
+        return SizeMismatch;
+      }
     }
 
-    if (checkShapeMatches == 0 || dimMatchMask ^ (0xffffffff >> (32 - tensor.dim()))) {
+    if (checkShapeMatches == 0) {
       // We didn't match one of the dimensions' shapes.
       return SizeMismatch;
     }

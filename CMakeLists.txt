@@ -59,7 +59,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY bunsen/py)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY build)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY build)
 
-add_custom_target(bunsen_py_lib COMMAND BUNSEN_VERSION=$ENV{BUNSEN_VERSION} pip install .)
+add_custom_target(bunsen_py_lib ${CMAKE_COMMAND} -E env BUNSEN_VERSION=$ENV{BUNSEN_VERSION} pip install .)
 add_executable(bunsen_dummy_target ${bunsen_utils_build_src} bunsen/builtins/Dummy.cpp)
 target_link_libraries(bunsen_dummy_target PRIVATE
         absl::flat_hash_map

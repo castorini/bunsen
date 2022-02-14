@@ -50,7 +50,7 @@ public:
   friend CheckStatus Check(const at::Tensor &tensor, const std::vector<TensorCheck> &checks);
 };
 
-CheckStatus Check(const at::Tensor &tensor, const std::vector<TensorCheck> &checks);
+CheckStatus Check(const at::Tensor &tensor, const std::vector<TensorCheck> &checks = {});
 
 }
 
